@@ -68,7 +68,16 @@ docker run -it --rm --name certbot -p 80:80 -v "$CERTBOT_VOLUME/conf:/etc/letsen
 
 # Khởi động container PeerTube
 echo ">>> Khởi động PeerTube..."
-docker compose up -d
+if docker compose up -d; then
+    echo "PeerTube đã khởi động thành công."
+else
+    echo "Có lỗi xảy ra khi khởi động PeerTube. Kiểm tra cấu hình và log."
+    echo ">>> Kiểm tra cấu hình Docker Compose:"
+    docker compose config
+    echo ">>> Xem log chi tiết:"
+    docker compose logs
+    exit 1
+fi
 
 # Thêm cron job để kiểm tra container mỗi phút
 echo ">>> Cấu hình cron job kiểm tra container..."
