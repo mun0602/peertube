@@ -35,10 +35,7 @@ cd $WORKDIR
 echo ">>> Tải xuống docker-compose.yml..."
 curl -s https://raw.githubusercontent.com/chocobozzz/PeerTube/master/support/docker/production/docker-compose.yml > docker-compose.yml
 
-# Thêm tự động khởi động lại vào docker-compose.yml
-sed -i '/services:/a\
-  restart: unless-stopped' docker-compose.yml
-
+# Tải xuống .env
 echo ">>> Tải xuống .env..."
 curl -s https://raw.githubusercontent.com/chocobozzz/PeerTube/master/support/docker/production/.env > .env
 
